@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 class FuncionarioTerceirizadoTest {
     private FuncionarioTerceirizado funcTer;
@@ -16,8 +16,7 @@ class FuncionarioTerceirizadoTest {
         int horasTrabalhadas = 10;
         double valorHora = 59.00;
         double despesaAd = 1500.00;
-        funcTer = new FuncionarioTerceirizado(entradaNomeConstrutor, horasTrabalhadas, valorHora, despesaAd);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> funcTer.calcularPagamento());
+        Assertions.assertThrows(IllegalArgumentException.class, () -> funcTer = new FuncionarioTerceirizado(entradaNomeConstrutor, horasTrabalhadas, valorHora, despesaAd));
     }
 
     @Test
@@ -40,27 +39,28 @@ class FuncionarioTerceirizadoTest {
     @DisplayName("Testar modificação das despesas com uma entrada inválida")
     public void testarModificarDespesaInvalida(){
         String entradaNomeConstrutor = "Juca";
-        int horasTrabalhadas = 50;
+        int horasTrabalhadas = 40;
         double valorHora = 120.00;
         double despesaAd = 1000.00;
         funcTer = new FuncionarioTerceirizado(entradaNomeConstrutor, horasTrabalhadas, valorHora, despesaAd);
         double novaValorDespesaAd = 1400.00;
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> funcTer.setDespesas(novaValorDespesaAd));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> funcTer.setDespesasAdicionais(novaValorDespesaAd));
     }
 
     @Test
     @DisplayName("Testar modificação das despesas com uma entrada valida")
     public void testarModificacaoDespesaValida(){
         String entradaNomeConstrutor = "Juca";
-        int horasTrabalhadas = 50;
+        int horasTrabalhadas = 40;
         double valorHora = 120.00;
         double despesaAd = 700.00;
         funcTer = new FuncionarioTerceirizado(entradaNomeConstrutor, horasTrabalhadas, valorHora, despesaAd);
         double novaValorDespesaAd = 1000.00;
         double resultadoEsperado = 1000.00;
 
-        double resultadoObtido = funcTer.getDespesas();
+        funcTer.setDespesasAdicionais(novaValorDespesaAd);
+        double resultadoObtido = funcTer.getDespesasAdicionais();
 
         Assertions.assertEquals(resultadoObtido, resultadoEsperado);
     }
